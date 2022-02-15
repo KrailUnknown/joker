@@ -1,0 +1,5 @@
+[jokes_api.chuck]
+URL="https://dad-jokes.p.rapidapi.com/random/joke"
+
+[jokes_api.dad]
+URL="https://icanhazdadjoke.com"
