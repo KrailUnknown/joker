@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/spore2102/joker/internal/config"
+	"github.com/spore2102/joker/internal/utils"
 )
 
 type chuckJokeProvider struct {
@@ -36,5 +37,11 @@ func (provider *chuckJokeProvider) GetJoke() (string, error) {
 		return "", err
 	}
 
-	return string(body), nil
+	joke, err := utils.GetByKeyFromJson(body, "value")
+
+	if err != nil {
+		return "", err
+	}
+
+	return joke, nil
 }

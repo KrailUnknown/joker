@@ -2,7 +2,6 @@ package jokeprovider
 
 import (
 	"github.com/spore2102/joker/internal/config"
-	"github.com/spore2102/joker/internal/types"
 )
 
 type jokeProvider struct {
@@ -15,7 +14,7 @@ type JokeProvider interface {
 	GetChuckJoke() (string, error)
 }
 
-func InitJokeProvider(cfg config.JokesApiConfig, jokeType types.JokeType) JokeProvider {
+func InitJokeProvider(cfg config.JokesApiConfig) JokeProvider {
 	return &jokeProvider{
 		chuckJokeProvider: initChuckJokeProvider(cfg.ChuckApiConfig),
 		dadJokeProvider:   initDadJokeProvider(cfg.DadApiConfig),

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/spore2102/joker/internal/config"
+	"github.com/spore2102/joker/internal/utils"
 )
 
 type dadJokeProvider struct {
@@ -22,7 +23,17 @@ func initDadJokeProvider(cfg config.DadJokesConfig) DadJokeProvider {
 }
 
 func (provider *dadJokeProvider) GetJoke() (string, error) {
-	resp, err := http.Get(provider.apiUrl)
+	client := http.Client{}
+
+	req, err := http.NewRequest("GET", provider.apiUrl, nil)
+
+	if err != nil {
+		return "", err
+	}
+
+	req.Header.Set("Accept", "application/json")
+
+	resp, err := client.Do(req)
 
 	if err != nil {
 		return "", err
@@ -36,5 +47,11 @@ func (provider *dadJokeProvider) GetJoke() (string, error) {
 		return "", err
 	}
 
-	return string(body), nil
+	joke, err := utils.GetByKeyFromJson(body, "joke")
+
+	if err != nil {
+		return "", err
+	}
+
+	return joke, nil
 }

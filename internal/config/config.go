@@ -1,7 +1,8 @@
 package config
 
 type Config struct {
-	JokesApiConfig JokesApiConfig `mapstructure:"jokes_api"`
+	JokesApiConfig  JokesApiConfig `mapstructure:"jokes_api"`
+	CurrentJokeType string
 }
 
 type JokesApiConfig struct {
